@@ -1,0 +1,22 @@
+# Игнорировать только кэш Unity, но не библиотеки
+/[Ll]ibrary/
+/[Tt]emp/
+/[Oo]bj/
+/[Bb]uild/
+/[Bb]uilds/
+/[Ll]ogs/
+
+# Автогенерируемые файлы IDE
+*.csproj
+*.unityproj
+*.sln
+*.suo
+*.userprefs
+
+# Игнорировать локальные настройки
+/[Uu]ser[Ss]ettings/
+
+# Большие бинарные файлы (если не используете Git LFS)
+*.aab
+*.apk
+*.unitypackage

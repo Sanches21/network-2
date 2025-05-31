@@ -9,7 +9,6 @@ public class SystemPath
     public string GetFullSavePath(string fileName)
     {
         string fullPath = Path.Combine(saveFolder, fileName + fileExtension);
-        Debug.Log(fullPath);
         return fullPath;
     }
 }

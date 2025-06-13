@@ -5,12 +5,13 @@ using Mirror;
 using TMPro;
 using UnityEngine.UI;
 
-public class GameManager : NetworkBehaviour
+public class GameManager : MonoBehaviour 
 {
     public static GameManager instance { get; private set; }
     public LocationDataBase locationDB;
-
+    
     private Location _activeLocation;
+    private Player _activePlayer;
 
     /* Описание и имя локаций справа сверху */
     [SerializeField]
@@ -47,6 +48,25 @@ public class GameManager : NetworkBehaviour
         _locationDescriptionText = _locationDescriptionObject.GetComponent<TextMeshProUGUI>();
 
         SetupLocationEvent();
+    }
+
+    private void Update()
+    {
+        if (Input.GetMouseButton(0))
+        {
+            if (_activeLocation == null || _activePlayer == null) 
+                return;
+
+
+            Vector2 newPos = _activeLocation.transform.position;
+            newPos.y += 1.09f/2f;
+            _activePlayer.StartMovingToLocation(newPos);
+        }
+    }
+
+    public void setActivePlayer(Player player)
+    {
+        _activePlayer = player;
     }
 
     #region locationHover

@@ -7,8 +7,11 @@ using UnityEngine;
 
 public class MapGenerator : NetworkBehaviour
 {
-    private const int SPRITE_WIDTH = 220;
-    private const int SPRITE_HEIGHT = 109;
+    private const float SPRITE_WIDTH = 2.2f;
+    private const float SPRITE_HEIGHT = 1.09f;
+
+    private const int mapSize = 50;
+
 
     [SerializeField]
     private GameObject locationPrefab;
@@ -18,12 +21,27 @@ public class MapGenerator : NetworkBehaviour
     private string saveFilePath;
 
 
-    private Dictionary<Vector2Int, Location> locationsGrid = new();
+    private Dictionary<Vector2Int, int> locationsGrid = new();
 
 
     private void Start()
     {
         saveFilePath = systemPath.GetFullSavePath(saveFileName);
+    }
+
+    private void GenerateMapPattern()
+    {
+        locationsGrid.Clear();
+
+        for (int x = 0; x < mapSize; x++)
+        {
+            for (int y = 0; y < mapSize; y++)
+            {
+                int locId = Random.Range(1, GameManager.instance.locationDB.size + 1);
+
+                locationsGrid.Add(new Vector2Int(x, y), locId);
+            }
+        }
     }
 
     public void Update()
@@ -37,8 +55,7 @@ public class MapGenerator : NetworkBehaviour
         if (Input.GetKeyDown(KeyCode.S)) {
             Save();
         }
-        if (Input.GetKeyDown(KeyCode.L))
-        {
+        if (Input.GetKeyDown(KeyCode.L)) {
             Load();
         }
     }
@@ -48,37 +65,28 @@ public class MapGenerator : NetworkBehaviour
     private void GenerateMap()
     {
         DeleteWorld();
-        //Random.InitState(mapSeed); // Инициализация генератора случайных чисел
 
-        int OrderLayers = 10500;
+        GenerateMapPattern();
 
-        int size = 50;
-
-        float deltaX = 0.0f;
-        float deltaY = 0.0f;
-
-        for (int row = 0; row < size; row++)
+        foreach (var loc in locationsGrid)
         {
-            for (int col = 0; col < size; col++)
-            {
-                Vector2 pos = new Vector2((deltaX + col)*SPRITE_WIDTH/200, (deltaY - (col * 0.5f))*SPRITE_HEIGHT/100);
-                GameObject locationGo = Instantiate(
-                    locationPrefab,
-                    transform
-                    );
+            var gridPos = loc.Key;
+            var locId = loc.Value;
 
-                int locationId = Random.Range(1, GameManager.instance.locationDB.size + 1);
-                Location location = locationGo.GetComponent<Location>();
+            //Нереальная китайская магическая формула позовляющая первратить квадратные координаты в изометрические
+            var orderLayer = -(gridPos.x + gridPos.y);
+            float newPosX = (gridPos.x - gridPos.y) * SPRITE_WIDTH / 2f;
+            float newPosY = (gridPos.x + gridPos.y) * SPRITE_HEIGHT / 2f;
+            Vector2 spawnPos = new Vector2(newPosX, newPosY);
 
-                location.Init(pos, locationId);
-                locationGo.transform.GetComponent<SpriteRenderer>().sortingOrder = OrderLayers;
-                NetworkServer.Spawn(locationGo);
-                OrderLayers -= 1;
+            GameObject locationGo = Instantiate(locationPrefab,transform);
 
-                Debug.Log($"Сгенерирована локация: {location.name}, id: {location._id}");
-            }
-            deltaX += 1f;
-            deltaY += 0.5f;
+            var location = locationGo.GetComponent<Location>();
+            location.Init(spawnPos, locId);
+            locationGo.transform.GetComponent<SpriteRenderer>().sortingOrder = orderLayer;
+            NetworkServer.Spawn(locationGo);
+
+            Debug.Log($"Сгенерирована локация: {location.name}, id: {location._id}");
         }
     }
 

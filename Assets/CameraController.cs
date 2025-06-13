@@ -1,17 +1,21 @@
 using UnityEngine;
+using UnityEngine.Experimental.Rendering.Universal;
 
 public class CameraController : MonoBehaviour
 {
     [Header("Настройки зума")]
-    [SerializeField] private float zoomSpeed = 5f;
-    [SerializeField] private float minZoom = 2f;
-    [SerializeField] private float maxZoom = 10f;
+    [SerializeField] private int zoomSpeed = 1;
+    [SerializeField] private float minZoom = 0.1f;
+    [SerializeField] private float maxZoom = 5f;
+    [SerializeField] private int spritesPPU = 100;
 
     private Camera cam;
+    private PixelPerfectCamera ppcam;
 
     private void Awake()
     {
         cam = GetComponent<Camera>();
+        ppcam = GetComponent<PixelPerfectCamera>();
     }
 
     private void Update()
@@ -19,8 +23,8 @@ public class CameraController : MonoBehaviour
         float scroll = Input.GetAxis("Mouse ScrollWheel");
         if (scroll != 0)
         {
-            float newSize = cam.orthographicSize - scroll * zoomSpeed;
-            cam.orthographicSize = Mathf.Clamp(newSize, minZoom, maxZoom);
+            int newSize = ppcam.assetsPPU + (int)(scroll * 10 * zoomSpeed) * 10;
+            ppcam.assetsPPU = Mathf.Clamp(newSize, (int)(minZoom * spritesPPU), (int)(maxZoom * spritesPPU));
         }
     }
 }

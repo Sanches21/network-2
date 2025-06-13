@@ -3,7 +3,15 @@
   "WorkspaceRootPath": "C:\\Users\\artuur\\reload mirror\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{7E258453-F92A-62F4-4798-D55F443A7514}|Assembly-CSharp.csproj|c:\\users\\artuur\\reload mirror\\assets\\locations\\mapgenerator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{7E258453-F92A-62F4-4798-D55F443A7514}|Assembly-CSharp.csproj|C:\\Users\\artuur\\reload mirror\\assets\\cameracontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7E258453-F92A-62F4-4798-D55F443A7514}|Assembly-CSharp.csproj|solutionrelative:assets\\cameracontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7E258453-F92A-62F4-4798-D55F443A7514}|Assembly-CSharp.csproj|c:\\users\\artuur\\reload mirror\\assets\\player.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7E258453-F92A-62F4-4798-D55F443A7514}|Assembly-CSharp.csproj|solutionrelative:assets\\player.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7E258453-F92A-62F4-4798-D55F443A7514}|Assembly-CSharp.csproj|C:\\Users\\artuur\\reload mirror\\assets\\locations\\mapgenerator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{7E258453-F92A-62F4-4798-D55F443A7514}|Assembly-CSharp.csproj|solutionrelative:assets\\locations\\mapgenerator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
@@ -11,12 +19,8 @@
       "RelativeMoniker": "D:0:0:{7E258453-F92A-62F4-4798-D55F443A7514}|Assembly-CSharp.csproj|solutionrelative:assets\\gamemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{7E258453-F92A-62F4-4798-D55F443A7514}|Assembly-CSharp.csproj|C:\\Users\\artuur\\reload mirror\\assets\\locations\\locationdatabase.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7E258453-F92A-62F4-4798-D55F443A7514}|Assembly-CSharp.csproj|solutionrelative:assets\\locations\\locationdatabase.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7E258453-F92A-62F4-4798-D55F443A7514}|Assembly-CSharp.csproj|C:\\Users\\artuur\\reload mirror\\assets\\systempath.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7E258453-F92A-62F4-4798-D55F443A7514}|Assembly-CSharp.csproj|solutionrelative:assets\\systempath.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{7E258453-F92A-62F4-4798-D55F443A7514}|Assembly-CSharp.csproj|C:\\Users\\artuur\\reload mirror\\assets\\locations\\location.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7E258453-F92A-62F4-4798-D55F443A7514}|Assembly-CSharp.csproj|solutionrelative:assets\\locations\\location.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -26,57 +30,69 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "MapGenerator.cs",
-              "DocumentMoniker": "C:\\Users\\artuur\\reload mirror\\Assets\\Locations\\MapGenerator.cs",
-              "RelativeDocumentMoniker": "Assets\\Locations\\MapGenerator.cs",
-              "ToolTip": "C:\\Users\\artuur\\reload mirror\\Assets\\Locations\\MapGenerator.cs",
-              "RelativeToolTip": "Assets\\Locations\\MapGenerator.cs",
-              "ViewState": "AgIAACcAAAAAAAAAAAAYwDsAAAAsAAAAAAAAAA==",
+              "DocumentIndex": 1,
+              "Title": "Player.cs",
+              "DocumentMoniker": "C:\\Users\\artuur\\reload mirror\\Assets\\Player.cs",
+              "RelativeDocumentMoniker": "Assets\\Player.cs",
+              "ToolTip": "C:\\Users\\artuur\\reload mirror\\Assets\\Player.cs",
+              "RelativeToolTip": "Assets\\Player.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAC4AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-31T07:17:14.91Z",
+              "WhenOpened": "2025-06-11T18:31:14.008Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "SystemPath.cs",
-              "DocumentMoniker": "C:\\Users\\artuur\\reload mirror\\Assets\\SystemPath.cs",
-              "RelativeDocumentMoniker": "Assets\\SystemPath.cs",
-              "ToolTip": "C:\\Users\\artuur\\reload mirror\\Assets\\SystemPath.cs",
-              "RelativeToolTip": "Assets\\SystemPath.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAABNAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-27T03:14:06.122Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
               "Title": "GameManager.cs",
               "DocumentMoniker": "C:\\Users\\artuur\\reload mirror\\Assets\\GameManager.cs",
               "RelativeDocumentMoniker": "Assets\\GameManager.cs",
               "ToolTip": "C:\\Users\\artuur\\reload mirror\\Assets\\GameManager.cs",
               "RelativeToolTip": "Assets\\GameManager.cs",
-              "ViewState": "AgIAAA0AAAAAAAAAAAAQwDEAAAAFAAAAAAAAAA==",
+              "ViewState": "AgIAABkAAAAAAAAAAAAQwD0AAAAWAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-27T02:38:44.203Z",
+              "WhenOpened": "2025-06-11T18:30:53.678Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Location.cs",
+              "DocumentMoniker": "C:\\Users\\artuur\\reload mirror\\Assets\\Locations\\Location.cs",
+              "RelativeDocumentMoniker": "Assets\\Locations\\Location.cs",
+              "ToolTip": "C:\\Users\\artuur\\reload mirror\\Assets\\Locations\\Location.cs",
+              "RelativeToolTip": "Assets\\Locations\\Location.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAACwAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-31T09:37:59.776Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "CameraController.cs",
+              "DocumentMoniker": "C:\\Users\\artuur\\reload mirror\\Assets\\CameraController.cs",
+              "RelativeDocumentMoniker": "Assets\\CameraController.cs",
+              "ToolTip": "C:\\Users\\artuur\\reload mirror\\Assets\\CameraController.cs",
+              "RelativeToolTip": "Assets\\CameraController.cs",
+              "ViewState": "AgIAAAEAAAAAAAAAAAAQwBIAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-31T09:13:09.047Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "LocationDataBase.cs",
-              "DocumentMoniker": "C:\\Users\\artuur\\reload mirror\\Assets\\Locations\\LocationDataBase.cs",
-              "RelativeDocumentMoniker": "Assets\\Locations\\LocationDataBase.cs",
-              "ToolTip": "C:\\Users\\artuur\\reload mirror\\Assets\\Locations\\LocationDataBase.cs",
-              "RelativeToolTip": "Assets\\Locations\\LocationDataBase.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAFAAAAAAAAAA==",
+              "Title": "MapGenerator.cs",
+              "DocumentMoniker": "C:\\Users\\artuur\\reload mirror\\Assets\\Locations\\MapGenerator.cs",
+              "RelativeDocumentMoniker": "Assets\\Locations\\MapGenerator.cs",
+              "ToolTip": "C:\\Users\\artuur\\reload mirror\\Assets\\Locations\\MapGenerator.cs",
+              "RelativeToolTip": "Assets\\Locations\\MapGenerator.cs",
+              "ViewState": "AgIAABQAAAAAAAAAAAAAwA8AAAAUAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-25T01:15:07.814Z",
+              "WhenOpened": "2025-05-31T07:17:14.91Z",
               "EditorCaption": ""
             }
           ]

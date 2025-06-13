@@ -28,11 +28,6 @@ public class Location : NetworkBehaviour
     /* ============================= */
 
 
-    public void Start()
-    {
-        _spriteRenderer = GetComponent<SpriteRenderer>();
-    }
-
     [Server]
     public void Init(Vector2 position, int id)
     {
@@ -45,6 +40,7 @@ public class Location : NetworkBehaviour
     {
         transform.position = _spawnPosition; // Клиент получает позицию при создании
 
+        _spriteRenderer = GetComponent<SpriteRenderer>();
         _spriteRenderer.sprite = GameManager.instance.locationDB.GetLocationData(_id).sprite;
     }
 

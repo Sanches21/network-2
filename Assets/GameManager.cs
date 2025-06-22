@@ -54,7 +54,7 @@ public class GameManager : MonoBehaviour
     {
         if (Input.GetMouseButton(0))
         {
-            if (_activeLocation == null || _activePlayer == null) 
+            if (_activeLocation == null || _activePlayer == null)//активная локация - та, которая выбрана. Память, содержащая ссылку на префаб, который является игроком (которым управляет игрок)
                 return;
 
 

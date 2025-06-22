@@ -335,10 +335,10 @@ Camera:
   m_LensShift: {x: 0, y: 0}
   m_NormalizedViewPortRect:
     serializedVersion: 2
-    x: 0
+    x: 0.08704062
     y: 0
-    width: 1
-    height: 1
+    width: 0.82527405
+    height: 1.0008341
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 34
@@ -1035,7 +1035,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 10000
   m_TargetDisplay: 0
 --- !u!224 &1897530042
 RectTransform:

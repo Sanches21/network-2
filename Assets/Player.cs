@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
+//
 public class Player : NetworkBehaviour
 {
     [Header("Настройки перемещения")]

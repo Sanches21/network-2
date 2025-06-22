@@ -21,6 +21,9 @@ public class MapGenerator : NetworkBehaviour
     private string saveFilePath;
 
 
+    /*Создаём тип данных словарь, у которого ключ представляет из себя тип данных Vector2Int,
+    *а значение представляет из себя тип данных int - означающий в контексте нашей игры Id локации ( ID отображаемой картинки и описания)
+    vvvvvvvvvvvvvvv*/
     private Dictionary<Vector2Int, int> locationsGrid = new();
 
 

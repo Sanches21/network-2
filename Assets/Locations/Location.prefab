@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 8805566220630058035}
   - component: {fileID: 773960978531163142}
-  - component: {fileID: -7806101822730490305}
   - component: {fileID: -7118117842374631938}
   - component: {fileID: 8435702900854879980}
+  - component: {fileID: 2505267621481552476}
   m_Layer: 0
   m_Name: Location
   m_TagString: MapPiece
@@ -87,23 +87,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &-7806101822730490305
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4470615724440483244}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sceneId: 0
-  _assetId: 1793015833
-  serverOnly: 0
-  visibility: 0
-  hasSpawned: 0
 --- !u!114 &-7118117842374631938
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -169,3 +152,20 @@ PolygonCollider2D:
       - {x: 1.1, y: 1.09}
       - {x: 2.2, y: 0.545}
   m_UseDelaunayMesh: 0
+--- !u!114 &2505267621481552476
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4470615724440483244}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneId: 0
+  _assetId: 1793015833
+  serverOnly: 0
+  visibility: 0
+  hasSpawned: 0

@@ -1,52 +1,39 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Mirror;
 using TMPro;
 using UnityEngine.UI;
+using Mirror;
+using System.Linq;
 
 public class GameManager : MonoBehaviour 
 {
     public static GameManager instance { get; private set; }
     public LocationDataBase locationDB;
     
-    private Location _activeLocation;
+    //Локация под курсором
+    private Location _selectedLocation;
+    //Локация на которой находится игрок
+    private Location _playerLocation;
+    //Игрок
     private Player _activePlayer;
 
-    /* Описание и имя локаций справа сверху */
-    [SerializeField]
-    private GameObject _locationNameObject;
-    [SerializeField]
-    private GameObject _locationDescriptionObject;
+    [SerializeField] private WorldMap _worldMap;
+    //Весь UI здесь
+    [SerializeField] private UiManager _uiManager;
 
-    private TextMeshProUGUI _locationNameText;
-    private TextMeshProUGUI _locationDescriptionText;
-    /* ==================================== */
 
     private void Awake()
     {
         if (instance == null)
         {
             instance = this;
-            DontDestroyOnLoad(gameObject);
             locationDB.Initialize();
-        }
-        else if (instance != this)
-        {
-            Destroy(gameObject);
         }
     }
 
     private void Start()
     {
-        if (_locationDescriptionObject == null || _locationNameObject == null)
-        {
-            Debug.LogError("Не установлен UI объект для имени или описания локации");
-        }
-
-        _locationNameText = _locationNameObject.GetComponent<TextMeshProUGUI>();
-        _locationDescriptionText = _locationDescriptionObject.GetComponent<TextMeshProUGUI>();
-
         SetupLocationEvent();
     }
 
@@ -54,11 +41,12 @@ public class GameManager : MonoBehaviour
     {
         if (Input.GetMouseButton(0))
         {
-            if (_activeLocation == null || _activePlayer == null) 
-                return;
+            //Если локация не выбрана или игрока не существует (например онли хост)
+            if (_selectedLocation == null || _activePlayer == null) return;
 
+            if (_playerLocation == _selectedLocation) return;
 
-            Vector2 newPos = _activeLocation.transform.position;
+            Vector2 newPos = _selectedLocation.transform.position;
             newPos.y += 1.09f/2f;
             _activePlayer.StartMovingToLocation(newPos);
         }
@@ -67,33 +55,66 @@ public class GameManager : MonoBehaviour
     public void setActivePlayer(Player player)
     {
         _activePlayer = player;
+
+        SetupPlayer();
+    }
+
+    public void SetupPlayer()
+    {
+        Location spawnLoc = _worldMap.locationGrid[new Vector2Int(0, 0)];
+
+        Vector2 spawnPos = spawnLoc.transform.position;
+        spawnPos.y += 1.09f / 2f;
+
+        _activePlayer.transform.position = spawnPos;
+        _playerLocation = spawnLoc;
+        _activePlayer._currentLocation = spawnLoc;
+
+        _activePlayer.onLocationChanged.AddListener(PlayerLocationChanged);
+
+        var playerLocInfo = locationDB.GetLocationData(_playerLocation._id);
+        _uiManager.UpdatePlayerLocation(playerLocInfo, _playerLocation.GetGridPos());
+
+        _activePlayer.UpdateLocationPlayers(null, _playerLocation);
+    }
+
+    public void PlayerLocationChanged(Location newLoc)
+    {
+        _playerLocation = newLoc;
+
+        var playerLocInfo = locationDB.GetLocationData(_playerLocation._id);
+        _uiManager.UpdatePlayerLocation(playerLocInfo, _playerLocation.GetGridPos());
+    }
+
+    public void UpdateLocationPlayersUI(Location location)
+    {
+        if (_playerLocation == location)
+        {
+            _uiManager.UpdateLocationPlayersList(location._playersOnLocation.ToList());
+        }
     }
 
     #region locationHover
     private void SetupLocationEvent()
     {
-        Location.OnMouserCursorEnter.AddListener(SetActiveLocation);
-        Location.OnMouseCursorExit.AddListener(ClearActiveLocation);
+        Location.OnMouserCursorEnter.AddListener(SetSelectedLocation);
+        Location.OnMouseCursorExit.AddListener(ClearSelectedLocation);
     }
 
-    private void SetActiveLocation(Location location)
+    private void SetSelectedLocation(Location location)
     {
-        _activeLocation = location;
+        _selectedLocation = location;
+        LocationInfo locInfo = locationDB.GetLocationData(_selectedLocation._id);
 
-        LocationInfo locInfo = locationDB.GetLocationData(_activeLocation._id);
-
-        _locationNameText.text = locInfo.displayName;
-        _locationDescriptionText.text = locInfo.description;
+        _uiManager.UpldateSelectedLocation(locInfo);
     }
 
-    private void ClearActiveLocation(Location location)
+    private void ClearSelectedLocation(Location location)
     {
-        if (_activeLocation == location)
+        if (_selectedLocation == location)
         {
-            _activeLocation = null;
-
-            _locationNameText.text = null;
-            _locationDescriptionText.text = null;
+            _selectedLocation = null;
+            _uiManager.UpldateSelectedLocation(null);
         }
     }
     #endregion

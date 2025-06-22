@@ -5,7 +5,7 @@ using System.IO;
 using System.Linq;
 using UnityEngine;
 
-public class MapGenerator : NetworkBehaviour
+public class WorldMap : NetworkBehaviour
 {
     private const float SPRITE_WIDTH = 2.2f;
     private const float SPRITE_HEIGHT = 1.09f;
@@ -21,7 +21,10 @@ public class MapGenerator : NetworkBehaviour
     private string saveFilePath;
 
 
-    private Dictionary<Vector2Int, int> locationsGrid = new();
+    private Dictionary<Vector2Int, int> locationsPattern = new();
+
+
+    public readonly SyncDictionary<Vector2Int, Location> locationGrid = new();
 
 
     private void Start()
@@ -29,19 +32,15 @@ public class MapGenerator : NetworkBehaviour
         saveFilePath = systemPath.GetFullSavePath(saveFileName);
     }
 
-    private void GenerateMapPattern()
+    public override void OnStartServer()
     {
-        locationsGrid.Clear();
+        base.OnStartServer();
+        GenerateMap();
+    }
 
-        for (int x = 0; x < mapSize; x++)
-        {
-            for (int y = 0; y < mapSize; y++)
-            {
-                int locId = Random.Range(1, GameManager.instance.locationDB.size + 1);
-
-                locationsGrid.Add(new Vector2Int(x, y), locId);
-            }
-        }
+    public Vector2Int GetLocationPos(Location location)
+    {
+        return locationGrid.FirstOrDefault(locPos => locPos.Value == location).Key;
     }
 
     public void Update()
@@ -61,6 +60,21 @@ public class MapGenerator : NetworkBehaviour
     }
 
     #region CreateDelete
+    private void GenerateMapPattern()
+    {
+        locationsPattern.Clear();
+
+        for (int x = 0; x < mapSize; x++)
+        {
+            for (int y = 0; y < mapSize; y++)
+            {
+                int locId = Random.Range(1, GameManager.instance.locationDB.size + 1);
+
+                locationsPattern.Add(new Vector2Int(x, y), locId);
+            }
+        }
+    }
+
     [Server]
     private void GenerateMap()
     {
@@ -68,7 +82,7 @@ public class MapGenerator : NetworkBehaviour
 
         GenerateMapPattern();
 
-        foreach (var loc in locationsGrid)
+        foreach (var loc in locationsPattern)
         {
             var gridPos = loc.Key;
             var locId = loc.Value;
@@ -82,9 +96,11 @@ public class MapGenerator : NetworkBehaviour
             GameObject locationGo = Instantiate(locationPrefab,transform);
 
             var location = locationGo.GetComponent<Location>();
-            location.Init(spawnPos, locId);
+            location.Init(spawnPos, locId, gridPos);
             locationGo.transform.GetComponent<SpriteRenderer>().sortingOrder = orderLayer;
             NetworkServer.Spawn(locationGo);
+
+            locationGrid.Add(gridPos, location);
 
             Debug.Log($"Сгенерирована локация: {location.name}, id: {location._id}");
         }
@@ -97,6 +113,7 @@ public class MapGenerator : NetworkBehaviour
     [Server]
     private void DeleteWorld()
     {
+        locationGrid.Clear();
         foreach (Transform location in transform)
         {
             Destroy(location.gameObject);
@@ -124,6 +141,10 @@ public class MapGenerator : NetworkBehaviour
         public float _positionX;
         [JsonProperty("y")]
         public float _positionY;
+        [JsonProperty("gx")]
+        public int _gridPositionX;
+        [JsonProperty("gy")]
+        public int _gridPositionY;
 
         [JsonIgnore] //Newtonsoft.json по умолчанию не может сериализовать кастомные типы по типу vector2, код ниже создан лишь для удобства
         public Vector2 position
@@ -133,6 +154,17 @@ public class MapGenerator : NetworkBehaviour
             {
                 _positionX = value.x;
                 _positionY = value.y;
+            }
+        }
+
+        [JsonIgnore]
+        public Vector2Int gridPosition
+        {
+            get => new Vector2Int(_gridPositionX, _gridPositionY);
+            set
+            {
+                _gridPositionX = value.x;
+                _gridPositionY = value.y;
             }
         }
     }
@@ -173,7 +205,7 @@ public class MapGenerator : NetworkBehaviour
                     transform
                     );
             Location location = locationGo.GetComponent<Location>();
-            location.Init(locInfo.position, locInfo._id);
+            location.Init(locInfo.position, locInfo._id, locInfo.gridPosition);
             NetworkServer.Spawn(locationGo);
 
             Debug.Log("Загружена локация " + location.name);
